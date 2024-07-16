@@ -43,18 +43,17 @@
 # COMMAND ----------
 
 
-raw_accidents_noheader = spark.read.csv("/Volumes/training/train/rawdatas/US_Accidents_March23.csv")
-display(raw_accidents_noheader)
+#TODO
 
 # COMMAND ----------
 
 # MAGIC %md
-# MAGIC II.2 [Sql] Afficher le contenu du fichier csv `/Volumes/training/raw/accidents/US_Accidents_March23.csv` (sans prendre en compte l'entête)
+# MAGIC II.2 [Sql] Afficher le contenu du fichier csv `/Volumes/training/raw/accidents/US_Accidents_March23.csv` 
 
 # COMMAND ----------
 
 # MAGIC %sql
-# MAGIC
+# MAGIC --(optionnel)
 
 # COMMAND ----------
 
@@ -64,8 +63,7 @@ display(raw_accidents_noheader)
 
 # COMMAND ----------
 
-raw_accidents_noschema_df = spark.read.option("header", "true").csv("/Volumes/training/train/rawdatas/US_Accidents_March23.csv")
-display(raw_accidents_noschema_df)
+#TODO
 
 # COMMAND ----------
 
@@ -75,6 +73,7 @@ display(raw_accidents_noschema_df)
 # COMMAND ----------
 
 # MAGIC %sql
+# MAGIC --(optionnel)
 
 # COMMAND ----------
 
@@ -83,7 +82,7 @@ display(raw_accidents_noschema_df)
 
 # COMMAND ----------
 
-raw_accidents_noschema_df.printSchema
+#TODO
 
 # COMMAND ----------
 
@@ -92,9 +91,11 @@ raw_accidents_noschema_df.printSchema
 
 # COMMAND ----------
 
-raw_accidents_df = spark.read.option("header", "true").option("inferSchema", "true").csv("/Volumes/training/train/rawdatas/US_Accidents_March23.csv")
+#TODO
 
-display(raw_accidents_df)
+# COMMAND ----------
+
+#TODO
 
 # COMMAND ----------
 
@@ -103,7 +104,7 @@ display(raw_accidents_df)
 
 # COMMAND ----------
 
-
+#TODO
 
 # COMMAND ----------
 
@@ -113,7 +114,7 @@ display(raw_accidents_df)
 # COMMAND ----------
 
 # MAGIC %sql
-# MAGIC
+# MAGIC --TODO
 
 # COMMAND ----------
 
@@ -127,7 +128,15 @@ display(raw_accidents_df)
 
 # COMMAND ----------
 
+from pyspark.sql.functions import round, col
 
+#TODO
+
+# COMMAND ----------
+
+# MAGIC %sql
+# MAGIC --(optionnel)
+# MAGIC
 
 # COMMAND ----------
 
@@ -136,7 +145,12 @@ display(raw_accidents_df)
 
 # COMMAND ----------
 
+#TODO
 
+# COMMAND ----------
+
+# MAGIC %sql
+# MAGIC --(optionnel)
 
 # COMMAND ----------
 
@@ -145,7 +159,12 @@ display(raw_accidents_df)
 
 # COMMAND ----------
 
+#TODO
 
+# COMMAND ----------
+
+# MAGIC %sql
+# MAGIC --(optionnel)
 
 # COMMAND ----------
 
@@ -154,13 +173,9 @@ display(raw_accidents_df)
 
 # COMMAND ----------
 
-
-
-# COMMAND ----------
-
-# MAGIC %md
-# MAGIC III.5 Utiliser les jointures pour calculer le pourcentage que représente chaque niveau de sévérité par état
+#TODO
 
 # COMMAND ----------
 
-
+# MAGIC %sql
+# MAGIC --(optionnel)

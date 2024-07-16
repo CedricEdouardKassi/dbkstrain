@@ -43,18 +43,20 @@
 # COMMAND ----------
 
 
-raw_accidents_noheader = spark.read.csv("/Volumes/training/train/rawdatas/US_Accidents_March23.csv")
+accidents_filepath = "/Volumes/training/raw/accidents/US_Accidents_March23.csv"
+raw_accidents_noheader = spark.read.csv(accidents_filepath)
 display(raw_accidents_noheader)
 
 # COMMAND ----------
 
 # MAGIC %md
-# MAGIC II.2 [Sql] Afficher le contenu du fichier csv `/Volumes/training/raw/accidents/US_Accidents_March23.csv` (sans prendre en compte l'entête)
+# MAGIC II.2 [Sql] Afficher le contenu du fichier csv `/Volumes/training/raw/accidents/US_Accidents_March23.csv` 
 
 # COMMAND ----------
 
 # MAGIC %sql
-# MAGIC
+# MAGIC use training.raw;
+# MAGIC select * from read_files('/Volumes/training/raw/accidents/US_Accidents_March23.csv', format => 'csv', header => false);
 
 # COMMAND ----------
 
@@ -64,7 +66,7 @@ display(raw_accidents_noheader)
 
 # COMMAND ----------
 
-raw_accidents_noschema_df = spark.read.option("header", "true").csv("/Volumes/training/train/rawdatas/US_Accidents_March23.csv")
+raw_accidents_noschema_df = spark.read.option("header", "true").csv(accidents_filepath)
 display(raw_accidents_noschema_df)
 
 # COMMAND ----------
@@ -75,6 +77,11 @@ display(raw_accidents_noschema_df)
 # COMMAND ----------
 
 # MAGIC %sql
+# MAGIC select * from read_files(
+# MAGIC     "/Volumes/training/raw/accidents/US_Accidents_March23.csv",
+# MAGIC     format => "csv",
+# MAGIC     header => true
+# MAGIC     )
 
 # COMMAND ----------
 
@@ -92,9 +99,22 @@ raw_accidents_noschema_df.printSchema
 
 # COMMAND ----------
 
-raw_accidents_df = spark.read.option("header", "true").option("inferSchema", "true").csv("/Volumes/training/train/rawdatas/US_Accidents_March23.csv")
+raw_accidents_df = spark.read.option("header", "true").option("inferSchema", "true").csv(accidents_filepath)
 
 display(raw_accidents_df)
+
+# COMMAND ----------
+
+raw_accidents_clean_df = raw_accidents_df.withColumnsRenamed({
+    "Distance(mi)": "Distance",
+    "Temperature(F)": "Temperature",
+    "Wind_Chill(F)": "Wind_Chill",
+    "Humidity(%)": "Humidity",
+    "Pressure(in)": "Pressure",
+    "Visibility(mi)": "Visibility",
+    "Wind_Speed(mph)": "Wind_Speed",
+    "Precipitation(in)": "Precipitation"
+})
 
 # COMMAND ----------
 
@@ -103,7 +123,7 @@ display(raw_accidents_df)
 
 # COMMAND ----------
 
-
+raw_accidents_clean_df.cache().write.format("delta").mode("overwrite").saveAsTable("training.accidents.us_accidents_clean_cka")
 
 # COMMAND ----------
 
@@ -113,7 +133,7 @@ display(raw_accidents_df)
 # COMMAND ----------
 
 # MAGIC %sql
-# MAGIC
+# MAGIC select * from training.accidents.us_accidents_clean_cka
 
 # COMMAND ----------
 
@@ -127,7 +147,31 @@ display(raw_accidents_df)
 
 # COMMAND ----------
 
+from pyspark.sql.functions import round, col
 
+rounded_accidents_df = raw_accidents_clean_df.withColumn("Start_Lat", round(col("Start_Lat"), 6))\
+    .withColumn("End_Lat", round(col("End_Lat"), 6))\
+    .withColumn("Start_Lng", round(col("Start_Lng"), 6))\
+    .withColumn("End_Lng", round(col("End_Lng"), 6))
+display(rounded_accidents_df)
+
+# COMMAND ----------
+
+# MAGIC %sql
+# MAGIC CREATE OR REPLACE VIEW training.accidents.us_accidents_rounded_cka
+# MAGIC as
+# MAGIC SELECT 
+# MAGIC     * 
+# MAGIC EXCEPT 
+# MAGIC     (Start_Lat, Start_Lng, End_Lat, End_Lng), 
+# MAGIC     ROUND(Start_Lat, 6) AS Start_Lat,
+# MAGIC     ROUND(Start_Lng, 6) AS Start_Lng,
+# MAGIC     ROUND(End_Lat, 6) AS End_Lat,
+# MAGIC     ROUND(End_Lng, 6) AS End_Lng
+# MAGIC FROM 
+# MAGIC     training.accidents.us_accidents_clean_cka;
+# MAGIC select * from training.accidents.us_accidents_rounded_cka;
+# MAGIC
 
 # COMMAND ----------
 
@@ -136,7 +180,16 @@ display(raw_accidents_df)
 
 # COMMAND ----------
 
+recents_only_df = rounded_accidents_df.where(col("Start_Time") > "2016-02-08T06:40:00.000+0000")
+display(recents_only_df)
 
+# COMMAND ----------
+
+# MAGIC %sql
+# MAGIC CREATE OR REPLACE VIEW training.accidents.us_accidents_recent_cka AS
+# MAGIC select * from training.accidents.us_accidents_rounded_cka 
+# MAGIC where Start_Time > "2016-02-08T00:00:00.000+0000";
+# MAGIC select * from training.accidents.us_accidents_recent_cka;
 
 # COMMAND ----------
 
@@ -145,7 +198,16 @@ display(raw_accidents_df)
 
 # COMMAND ----------
 
+recents_accidents_by_state_and_sev_df = recents_only_df.select("Severity", "State").groupBy("State", "Severity").count()
+display(recents_accidents_by_state_and_sev_df)
 
+# COMMAND ----------
+
+# MAGIC %sql
+# MAGIC CREATE OR REPLACE  VIEW training.accidents.us_accidents_by_state_and_sev_cka AS
+# MAGIC select State, Severity, Count(*) as count from training.accidents.us_accidents_recent_cka
+# MAGIC group by State, Severity;
+# MAGIC select * from training.accidents.us_accidents_by_state_and_sev_cka;
 
 # COMMAND ----------
 
@@ -154,13 +216,13 @@ display(raw_accidents_df)
 
 # COMMAND ----------
 
-
-
-# COMMAND ----------
-
-# MAGIC %md
-# MAGIC III.5 Utiliser les jointures pour calculer le pourcentage que représente chaque niveau de sévérité par état
+recents_accidents_by_state_df = recents_only_df.select("State").groupBy("State").count()
+display(recents_accidents_by_state_df)
 
 # COMMAND ----------
 
-
+# MAGIC %sql
+# MAGIC CREATE OR REPLACE  VIEW training.accidents.us_accidents_by_state_cka AS
+# MAGIC select State, Count(*) as count from training.accidents.us_accidents_recent_cka
+# MAGIC group by State;
+# MAGIC select * from training.accidents.us_accidents_by_state_cka;
