@@ -42,8 +42,11 @@
 
 # COMMAND ----------
 
+#python
 
-#TODO
+# COMMAND ----------
+
+#python
 
 # COMMAND ----------
 
@@ -53,7 +56,9 @@
 # COMMAND ----------
 
 # MAGIC %sql
-# MAGIC --(optionnel)
+# MAGIC
+# MAGIC -- Display the data from the CSV file located at /Volumes/training/raw/accidents/US_Accidents_March23.csv
+# MAGIC
 
 # COMMAND ----------
 
@@ -65,6 +70,7 @@
 
 #TODO
 
+
 # COMMAND ----------
 
 # MAGIC %md
@@ -73,7 +79,9 @@
 # COMMAND ----------
 
 # MAGIC %sql
-# MAGIC --(optionnel)
+# MAGIC
+# MAGIC -- Display the data from the CSV file located at /Volumes/training/raw/accidents/US_Accidents_March23.csv, including the header
+# MAGIC
 
 # COMMAND ----------
 
@@ -95,21 +103,45 @@
 
 # COMMAND ----------
 
+# MAGIC %md
+# MAGIC II.7 [python] Créer le dataframe `raw_accidents_clean_df` à partir du dataframe `raw_accidents_df` en renommant les colonnes suivantes : 
+# MAGIC -     Distance(mi) -> Distance
+# MAGIC - Temperature(F)-> Temperature
+# MAGIC - Wind_Chill(F) -> Wind_Chill
+# MAGIC - Humidity(%) ->Humidity
+# MAGIC - Pressure(in) -> Pressure
+# MAGIC - Visibility(mi) -> Visibility
+# MAGIC - Wind_Speed(mph) -> Wind_Speed
+# MAGIC - Precipitation(in) -> Precipitation
+# MAGIC
+# MAGIC
+
+# COMMAND ----------
+
+raw_accidents_clean_df = raw_accidents_df.withColumnsRenamed({
+    "Distance(mi)": "Distance",
+    "Temperature(F)": "Temperature",
+    "Wind_Chill(F)": "Wind_Chill",
+    "Humidity(%)": "Humidity",
+    "Pressure(in)": "Pressure",
+    "Visibility(mi)": "Visibility",
+    "Wind_Speed(mph)": "Wind_Speed",
+    "Precipitation(in)": "Precipitation"
+})
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC II.8 [python] Sauvegarder le contenu du dataframe `raw_accidents_clean_df` en tant table delta `training.accidents.us_accidents_clean_<votrenom>`
+
+# COMMAND ----------
+
 #TODO
 
 # COMMAND ----------
 
 # MAGIC %md
-# MAGIC II.7 [python] Sauvegarder le contenu du dataframe `raw_accidents_df` en tant table delta `training.accidents.us_accidents_clean_<votrenom>`
-
-# COMMAND ----------
-
-#TODO
-
-# COMMAND ----------
-
-# MAGIC %md
-# MAGIC II.8 [sql] Afficher le contenu de votre table delta `training.accidents.us_accidents_clean_<votrenom>`
+# MAGIC II.9 [sql] Afficher le contenu de votre table delta `training.accidents.us_accidents_clean_<votrenom>`
 
 # COMMAND ----------
 
