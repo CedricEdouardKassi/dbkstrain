@@ -36,7 +36,7 @@
 # COMMAND ----------
 
 # MAGIC %md
-# MAGIC **II.1 [Python]** Lire le contenu du fichier csv `/Volumes/training/raw/accidents/US_Accidents_March23.csv` (sans prendre en compte l'entête) dans le dataframe raw_accidents_noheader_df et l'afficher
+# MAGIC **II.1 [Python]** Lire le contenu du fichier csv `/Volumes/sbx_tr_iteam_all/raw/accidents/US_Accidents_March23.csv` (sans prendre en compte l'entête) dans le dataframe raw_accidents_noheader_df et l'afficher
 # MAGIC
 # MAGIC Tips : https://spark.apache.org/docs/latest/sql-data-sources-csv.html 
 
@@ -95,7 +95,7 @@
 # COMMAND ----------
 
 # MAGIC %md
-# MAGIC II.6 [python] Créer un dataframe `raw_accidents_df` à partir du fichier `/Volumes/training/train/rawdatas/US_Accidents_March23.csv` tout en inférant le schema et l'afficher
+# MAGIC II.6 [python] Créer un dataframe `raw_accidents_df` à partir du fichier `/Volumes/sbx_tr_iteam_all/train/rawdatas/US_Accidents_March23.csv` tout en inférant le schema et l'afficher
 
 # COMMAND ----------
 
@@ -132,7 +132,7 @@ raw_accidents_clean_df = raw_accidents_df.withColumnsRenamed({
 # COMMAND ----------
 
 # MAGIC %md
-# MAGIC II.8 [python] Sauvegarder le contenu du dataframe `raw_accidents_clean_df` en tant table delta `training.accidents.us_accidents_clean_<votrenom>`
+# MAGIC II.8 [python] Sauvegarder le contenu du dataframe `raw_accidents_clean_df` en tant table delta `sbx_tr_iteam_all.accidents.us_accidents_clean_<votrenom>`
 
 # COMMAND ----------
 
@@ -141,7 +141,7 @@ raw_accidents_clean_df = raw_accidents_df.withColumnsRenamed({
 # COMMAND ----------
 
 # MAGIC %md
-# MAGIC II.9 [sql] Afficher le contenu de votre table delta `training.accidents.us_accidents_clean_<votrenom>`
+# MAGIC II.9 [sql] Afficher le contenu de votre table delta `sbx_tr_iteam_all.accidents.us_accidents_clean_<votrenom>`
 
 # COMMAND ----------
 
