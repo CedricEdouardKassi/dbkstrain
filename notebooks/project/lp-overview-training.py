@@ -51,19 +51,19 @@
 # COMMAND ----------
 
 # MAGIC %md
-# MAGIC II.2 [Sql] Afficher le contenu du fichier csv `/Volumes/training/raw/accidents/US_Accidents_March23.csv` 
+# MAGIC II.2 [Sql] Afficher le contenu du fichier csv `/Volumes/sbx_tr_iteam_all/raw/accidents/US_Accidents_March23.csv` 
 
 # COMMAND ----------
 
 # MAGIC %sql
 # MAGIC
-# MAGIC -- Display the data from the CSV file located at /Volumes/training/raw/accidents/US_Accidents_March23.csv
+# MAGIC -- Display the data from the CSV file located at /Volumes/sbx_tr_iteam_all/raw/accidents/US_Accidents_March23.csv
 # MAGIC
 
 # COMMAND ----------
 
 # MAGIC %md
-# MAGIC II.3 [Python] Lire le contenu du fichier csv `/Volumes/training/raw/accidents/US_Accidents_March23.csv` (en prenant en compte l'entête) dans le dataframe `raw_accidents_noschema_df` et l'afficher
+# MAGIC II.3 [Python] Lire le contenu du fichier csv `/Volumes/sbx_tr_iteam_all/raw/accidents/US_Accidents_March23.csv` (en prenant en compte l'entête) dans le dataframe `raw_accidents_noschema_df` et l'afficher
 # MAGIC Tips : https://spark.apache.org/docs/latest/sql-data-sources-csv.html
 
 # COMMAND ----------
@@ -74,13 +74,13 @@
 # COMMAND ----------
 
 # MAGIC %md
-# MAGIC II.4 [Sql] Afficher le contenu du fichier csv `/Volumes/training/raw/accidents/US_Accidents_March23.csv` (en prenant  en compte l'entête)
+# MAGIC II.4 [Sql] Afficher le contenu du fichier csv `/Volumes/sbx_tr_iteam_all//raw/accidents/US_Accidents_March23.csv` (en prenant  en compte l'entête)
 
 # COMMAND ----------
 
 # MAGIC %sql
 # MAGIC
-# MAGIC -- Display the data from the CSV file located at /Volumes/training/raw/accidents/US_Accidents_March23.csv, including the header
+# MAGIC -- Display the data from the CSV file located at /Volumes/sbx_tr_iteam_all//raw/accidents/US_Accidents_March23.csv, including the header
 # MAGIC
 
 # COMMAND ----------
@@ -95,7 +95,7 @@
 # COMMAND ----------
 
 # MAGIC %md
-# MAGIC II.6 [python] Créer un dataframe `raw_accidents_df` à partir du fichier `/Volumes/sbx_tr_iteam_all/train/rawdatas/US_Accidents_March23.csv` tout en inférant le schema et l'afficher
+# MAGIC II.6 [python] Créer un dataframe `raw_accidents_df` à partir du fichier `/Volumes/sbx_tr_iteam_all//raw/accidents/US_Accidents_March23.csv` tout en inférant le schema et l'afficher
 
 # COMMAND ----------
 
