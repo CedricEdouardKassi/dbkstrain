@@ -87,7 +87,7 @@ display(raw_accidents_noheader_df)
 # COMMAND ----------
 
 # MAGIC %md
-# MAGIC II.5 [python] Afficher le schema du dataframe `raw_accidents_no_schema_df`
+# MAGIC II.5 [python] Afficher le schema du dataframe `raw_accidents_noschema_df`
 
 # COMMAND ----------
 
