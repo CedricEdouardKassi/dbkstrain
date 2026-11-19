@@ -36,13 +36,13 @@
 # COMMAND ----------
 
 # MAGIC %md
-# MAGIC **II.1 [Python]** Lire le contenu du fichier csv `/Volumes/sbx_tr_bgpn_all/raw/accidents/US_Accidents_March23.csv` (sans prendre en compte l'entête) dans le dataframe raw_accidents_noheader_df et l'afficher
+# MAGIC **II.1 [Python]** Lire le contenu du fichier csv `/Volumes/sbx_tr_data_all/raw/accidents/US_Accidents_March23.csv` (sans prendre en compte l'entête) dans le dataframe raw_accidents_noheader_df et l'afficher
 # MAGIC
 # MAGIC Tips : https://spark.apache.org/docs/latest/sql-data-sources-csv.html 
 
 # COMMAND ----------
 
-raw_accidents_noheader_df = spark.read.option("header", "false").csv("/Volumes/sbx_tr_bgpn_all/raw/accidents/US_Accidents_March23.csv")
+raw_accidents_noheader_df = spark.read.option("header", "false").csv("/Volumes/sbx_tr_data_all/raw/accidents/US_Accidents_March23.csv")
 display(raw_accidents_noheader_df)
 
 # COMMAND ----------
@@ -52,19 +52,19 @@ display(raw_accidents_noheader_df)
 # COMMAND ----------
 
 # MAGIC %md
-# MAGIC II.2 [Sql] Afficher le contenu du fichier csv `/Volumes/sbx_tr_bgpn_all/raw/accidents/US_Accidents_March23.csv` 
+# MAGIC II.2 [Sql] Afficher le contenu du fichier csv `/Volumes/sbx_tr_data_all/raw/accidents/US_Accidents_March23.csv` 
 
 # COMMAND ----------
 
 # MAGIC %sql
 # MAGIC
-# MAGIC -- Display the data from the CSV file located at /Volumes/sbx_tr_bgpn_all/raw/accidents/US_Accidents_March23.csv
+# MAGIC -- Display the data from the CSV file located at /Volumes/sbx_tr_data_all/raw/accidents/US_Accidents_March23.csv
 # MAGIC
 
 # COMMAND ----------
 
 # MAGIC %md
-# MAGIC II.3 [Python] Lire le contenu du fichier csv `/Volumes/sbx_tr_bgpn_all/raw/accidents/US_Accidents_March23.csv` (en prenant en compte l'entête) dans le dataframe `raw_accidents_noschema_df` et l'afficher
+# MAGIC II.3 [Python] Lire le contenu du fichier csv `/Volumes/sbx_tr_data_all/raw/accidents/US_Accidents_March23.csv` (en prenant en compte l'entête) dans le dataframe `raw_accidents_noschema_df` et l'afficher
 # MAGIC Tips : https://spark.apache.org/docs/latest/sql-data-sources-csv.html
 
 # COMMAND ----------
@@ -75,13 +75,13 @@ display(raw_accidents_noheader_df)
 # COMMAND ----------
 
 # MAGIC %md
-# MAGIC II.4 [Sql] Afficher le contenu du fichier csv `/Volumes/sbx_tr_bgpn_all//raw/accidents/US_Accidents_March23.csv` (en prenant  en compte l'entête)
+# MAGIC II.4 [Sql] Afficher le contenu du fichier csv `/Volumes/sbx_tr_data_all//raw/accidents/US_Accidents_March23.csv` (en prenant  en compte l'entête)
 
 # COMMAND ----------
 
 # MAGIC %sql
 # MAGIC
-# MAGIC -- Display the data from the CSV file located at /Volumes/sbx_tr_bgpn_all//raw/accidents/US_Accidents_March23.csv, including the header
+# MAGIC -- Display the data from the CSV file located at /Volumes/sbx_tr_data_all//raw/accidents/US_Accidents_March23.csv, including the header
 # MAGIC
 
 # COMMAND ----------
@@ -96,7 +96,7 @@ display(raw_accidents_noheader_df)
 # COMMAND ----------
 
 # MAGIC %md
-# MAGIC II.6 [python] Créer un dataframe `raw_accidents_df` à partir du fichier `/Volumes/sbx_tr_bgpn_all//raw/accidents/US_Accidents_March23.csv` tout en inférant le schema et l'afficher
+# MAGIC II.6 [python] Créer un dataframe `raw_accidents_df` à partir du fichier `/Volumes/sbx_tr_data_all//raw/accidents/US_Accidents_March23.csv` tout en inférant le schema et l'afficher
 
 # COMMAND ----------
 
@@ -133,7 +133,7 @@ raw_accidents_clean_df = raw_accidents_df.withColumnsRenamed({
 # COMMAND ----------
 
 # MAGIC %md
-# MAGIC II.8 [python] Sauvegarder le contenu du dataframe `raw_accidents_clean_df` en tant table delta `sbx_tr_bgpn_all.accidents.us_accidents_clean_<votrenom>`
+# MAGIC II.8 [python] Sauvegarder le contenu du dataframe `raw_accidents_clean_df` en tant table delta `sbx_tr_data_all.accidents.us_accidents_clean_<votrenom>`
 
 # COMMAND ----------
 
@@ -142,7 +142,7 @@ raw_accidents_clean_df = raw_accidents_df.withColumnsRenamed({
 # COMMAND ----------
 
 # MAGIC %md
-# MAGIC II.9 [sql] Afficher le contenu de votre table delta `sbx_tr_bgpn_all.accidents.us_accidents_clean_<votrenom>`
+# MAGIC II.9 [sql] Afficher le contenu de votre table delta `sbx_tr_data_all.accidents.us_accidents_clean_<votrenom>`
 
 # COMMAND ----------
 
